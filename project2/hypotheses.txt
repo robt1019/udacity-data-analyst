@@ -1,0 +1,30 @@
+
+
+wrangling
+    change column names
+
+
+things i can use to analyse things
+
+    pearsons r for correlation between linear values - actually not sure it makes sense to use this for the data here as it's binary
+    as in survived or died so a bit different
+
+Questions to answer:
+    Who likely to survive
+
+        Being part of a family/size of family vs survival
+
+        Class - find correlation between this and survival using Pearson's R
+           seems to be a link between being higher up the socio-economic ladder findand not dying 
+
+        Gender - 
+
+            first impressions. Definitely good to be a lady if you don't want to die on the Titani
+
+        Age 
+
+
+
+            Then -> combination of above factors
+
+
