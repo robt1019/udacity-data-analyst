@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 
 titanic_df = pd.read_csv('./titanic-data.csv')
 
@@ -7,10 +8,21 @@ titanic_df = pd.read_csv('./titanic-data.csv')
 titanic_df.columns = ['passengerid', 'survived', 'se_class', 'name', 'sex', 'age', 'siblings_spouses_count', \
 'parents_children_count', 'ticket', 'fare', 'cabin', 'embarcation_point']
 
+# map survived numbers to words
+def survived_value_to_words(value):
+    if value == 1:
+        return 'survived'
+    elif value == 0:
+        return 'died'
+
+titanic_df['survived'] = titanic_df['survived'].map(survived_value_to_words)
+
 # show initial survival rates
 titanic_by_survived = titanic_df.groupby('survived')
 print '\nsurvival rate overall'
 print titanic_by_survived.size()
+plt.hist(titanic_by_survived)
+plt.show()
 
 def survival_rate_by(data_frame, dimension):
     data_frame_by_dimension = data_frame.groupby(dimension)
@@ -30,7 +42,7 @@ survival_rate_by(titanic_df, 'sex')
 # remove null values from age. Base is still 714. Seems reasonable for analysis
 titanic_without_null_ages = titanic_df.dropna(subset=['age'])
 print '\ntitanic without null ages base: '
-print len(titanic_without_null_ages )
+print len(titanic_without_null_ages)
 
 # used this to figure out a good split for bins. Those returned by qcut are [ 0.42,  19.  ,  25.  ,  31.8 ,  41.  ,  80.  ]
 titanic_age_equal_bin_labels = ['first', 'second', 'third', 'fourth', 'fifth']
