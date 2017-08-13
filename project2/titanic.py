@@ -8,30 +8,26 @@ titanic_df.columns = ['passengerid', 'survived', 'se_class', 'name', 'sex', 'age
 'parents_children_count', 'ticket', 'fare', 'cabin', 'embarcation_point']
 
 # show initial survival rates
-print '\n survival rate overall'
 titanic_by_survived = titanic_df.groupby('survived')
-print '\ntitanic survival split'
+print '\nsurvival rate overall'
 print titanic_by_survived.size()
 
+def survival_rate_by(data_frame, dimension):
+    data_frame_by_dimension = data_frame.groupby(dimension)
+    print '\ntitanic ' + dimension + ' split'
+    print data_frame_by_dimension.size() 
+    print '\ntitanic survival by ' + dimension
+    print data_frame_by_dimension['survived'].mean()
+    return data_frame_by_dimension['survived'].mean()
 
 # se class survival basic analysis
-titanic_by_class = titanic_df.groupby('se_class')
-print '\n titanic class split'
-print titanic_by_class.size()
-class_survival = titanic_by_class['survived'].mean()
-print '\nsurvival by class'
-print class_survival
+survival_rate_by(titanic_df, 'se_class')
 
 # gender survival basic analysis
-titanic_by_gender = titanic_df.groupby('sex')
-print '\ntitanic gender split'
-print titanic_by_gender.size()
-gender_survival = titanic_by_gender['survived'].mean()
-print '\nsurvival by gender'
-print gender_survival
+survival_rate_by(titanic_df, 'sex')
 
 # age survival basic analysis
-# remove null values from age. Base is still 714
+# remove null values from age. Base is still 714. Seems reasonable for analysis
 titanic_without_null_ages = titanic_df.dropna(subset=['age'])
 print '\ntitanic without null ages base: '
 print len(titanic_without_null_ages )
@@ -52,7 +48,16 @@ titanic_age_bin_labels = ['0-18', '18-25','25-30', '30-40', '40-80']
 titanic_df['age_binned'] = pd.cut(titanic_without_null_ages['age'], titanic_age_bins, labels=titanic_age_bin_labels)
 
 titanic_by_age = titanic_df.groupby('age_binned')
-print '\ntitanic age split'
-print titanic_by_age.size()
-print '\nsurvival by age'
-print titanic_by_age['survived'].mean()
+survival_rate_by(titanic_df, 'age_binned')
+
+# look at impact of being part of a family on survival
+def part_of_family(index):
+    if titanic_df.iloc[index]['siblings_spouses_count'] > 0 or titanic_df.iloc[index]['parents_children_count'] > 0:
+        return True
+    return False
+
+titanic_by_part_of_family = titanic_df.groupby(part_of_family)
+print '\ntitanic part of family split'
+print titanic_by_part_of_family.size()
+print '\ntitanic survival by part of family'
+print titanic_by_part_of_family['survived'].mean()

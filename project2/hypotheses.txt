@@ -1,7 +1,14 @@
 
+main Questions
+    what factors are linked to surviving the sinking of titanic
+
+    general aims
+        avoid analysis on anything with impractically low base sizes
+
 todo:
-    need to figure out how to properly bin age data. Split between base sizes nice and neatly
-        done
+    try doing some standardizing etc. vectorized operations of some sort
+        maybe do grouping to make separate df type objects then combine them
+        family analysis could be good for vectorized operations
 
 wrangling
     change column names
