@@ -1,7 +1,12 @@
 
+todo:
+    need to figure out how to properly bin age data. Split between base sizes nice and neatly
+        done
 
 wrangling
     change column names
+    remove na from ages
+    bin age data
 
 
 things i can use to analyse things
@@ -14,17 +19,14 @@ Questions to answer:
 
         Being part of a family/size of family vs survival
 
-        Class - find correlation between this and survival using Pearson's R
+        Class - find correlation between this 
            seems to be a link between being higher up the socio-economic ladder findand not dying 
 
         Gender - 
-
-            first impressions. Definitely good to be a lady if you don't want to die on the Titani
+            first impressions. Definitely good to be a lady if you don't want to die on the Titanic
 
         Age 
-
-
-
-            Then -> combination of above factors
+            very young (0-18) and (30-40) survived more. Would be good to combine this with gender
+                Then -> combination of above factors
 
 
